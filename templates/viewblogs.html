@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'doctor.css' %}" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/patient/{{ user.id }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/patient/{{ user.id }}/viewblogs/1">Mental Health</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/patient/{{ user.id }}/viewblogs/2">Heart Disease</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/patient/{{ user.id }}/viewblogs/3">Covid 19</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/patient/{{ user.id }}/viewblogs/4">Immunization</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/">Logout</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+  
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+        {% for x in blogs reversed%}
+        {% if forloop.counter0|divisibleby:4 %}
+        <div class="row">
+          {% endif %}
+          <div class="col-md-6 col-lg-3  align-items-stretch mb-5 mb-lg-0">
+            <a href="blog/{{ x.id }}">
+              <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                <img src="{{ x.image.url}}" />
+                <h4 class="title">{{ x.title }}</h4>
+                <p class="description">{{ x.summary|truncatewords:15 }}</p>
+              </div>
+            </a>
+          </div>
+          {% if forloop.counter != 0 %}
+          {% if forloop.counter|divisibleby:4 %}
+        </div>
+        <br><br>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
+      </div>
+    </section><!-- End Services Section -->
+
+
+  </main><!-- End #main -->
+
+
+
+  <script src="{% static 'bootstrap.min.js' %}" async defer></script>
+</body>
+
+</html>

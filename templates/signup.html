@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Sign Up</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" />
+    <script>
+        function passwordvalidate() {
+            let password = document.getElementById("id_password").value;
+            let confirmpassword = document.getElementById("id_confirm_password").value;
+            if (password != confirmpassword) {
+                document.getElementById("passworderror").innerHTML = "Passwords do not match";
+                document.getElementById("submitbutton").disabled = true;
+            }
+            else{
+                document.getElementById("passworderror").innerHTML = "";
+                document.getElementById("submitbutton").disabled = false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="signupin">
+        <form class="row g-3" method="post" enctype="multipart/form-data" action="signupdata" style="margin:100px 0px;">
+            {% csrf_token %}
+            <!--- <div class="col-md-6">
+                <input type="text" class="form-control" id="inputCity" placeholder="First Name" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="inputState" placeholder="Last Name" />
+            </div>
+            <div class="col-md-6">
+                <select id="type" name="Type">
+                    <option value="Patient">Patient</option>
+                    <option value="Doctor">Doctor</option>
+                  </select>
+            </div>-->
+
+            {{ form.as_div }}
+
+            <!--
+            <div class="col-md-12">
+                <input type="email" class="form-control" id="inputEmail4" placeholder="User Name" />
+            </div>
+            <div class="col-md-12">
+                <input type="email" class="form-control" id="inputEmail4" onkeypress="emailvalidate()"
+                    placeholder="Email" />
+            </div>
+            <div class="col-md-12">
+                <input type="password" class="form-control" id="inputPassword4" placeholder="Password" />
+            </div>
+            <div class="col-md-12">
+                <input type="password" class="form-control" id="inputPassword4" onkeypress="passwordvalidate()"
+                    placeholder="Confirm Password" />
+            </div>
+            <div class="col-12">
+                <input type="text" class="form-control" id="inputPhone" placeholder="Address"/>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="inputCity" placeholder="City"/>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="inputState" placeholder="State"/>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="inputState" placeholder="Pincode"/>
+            </div>
+        -->
+            <p id="passworderror"></p>
+            <div class="col-12">
+                <div>
+                    <button type="submit" class="btn btn-primary" id="submitbutton">Sign Up</button>
+                </div>
+            </div>
+
+
+            <p>Already have an account? <a href="login">Login</a></p>
+        </form>
+    </div>
+
+    <script src="{% static 'bootstrap.min.js' %}" async defer></script>
+</body>
+
+</html>
